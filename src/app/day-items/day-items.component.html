@@ -1,0 +1,37 @@
+<mat-table [dataSource]="dataSource()" class="mat-elevation-z8">
+  <!-- Von Spalte -->
+  <ng-container matColumnDef="von">
+    <mat-header-cell *matHeaderCellDef>Von</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{element.startTime | date:'HH:mm'}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Bis Spalte -->
+  <ng-container matColumnDef="bis">
+    <mat-header-cell *matHeaderCellDef>Bis</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{element.endTime | date:'HH:mm'}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Buchungstext Spalte -->
+  <ng-container matColumnDef="Buchungselement">
+    <mat-header-cell *matHeaderCellDef>Buchungselement</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{element.bookingelement}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Erklärung Spalte -->
+  <ng-container matColumnDef="Buchungstext">
+    <mat-header-cell *matHeaderCellDef>Buchungstext</mat-header-cell>
+    <mat-cell *matCellDef="let element">
+      {{element.explainingText}}
+    </mat-cell>
+  </ng-container>
+
+  <!-- Header und Row Definitionen -->
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>

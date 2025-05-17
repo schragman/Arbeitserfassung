@@ -1,0 +1,16 @@
+.mat-datepicker-toggle button {
+  color: rgba(0, 150, 136, 1) !important; /* oder eine eigene Farbe */
+}
+.mat-timepicker-toggle button {
+  color: rgba(0, 150, 136, 1) !important; /* oder eine eigene Farbe */
+}
+.dateContainer {
+  margin-bottom: 30px;
+}
+.timeContainer {
+  margin-bottom: 10px;
+}
+
+.current-time-button {
+  margin: 10px;
+}

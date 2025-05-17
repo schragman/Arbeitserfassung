@@ -1,0 +1,46 @@
+<div [formGroup]="form">
+
+  <div class="dateContainer">
+    <mat-form-field >
+      <input matInput formControlName="bookingdate" [matDatepicker]="pickerDatum"> <!--[(ngModel)]="selectedDate"/>-->
+      <mat-label>Datum</mat-label>
+      <mat-datepicker-toggle matIconSuffix [for]="pickerDatum"/>
+      <mat-datepicker #pickerDatum></mat-datepicker>
+    </mat-form-field>
+  </div>
+
+  <div class="timeContainer">
+    <mat-form-field>
+      <input matInput formControlName="bookingfrom" [matTimepicker]="pickerVon"> <!--[(ngModel)]="startingTime">-->
+      <mat-label>von</mat-label>
+      <mat-timepicker-toggle matIconSuffix [for]="pickerVon"/>
+      <mat-timepicker #pickerVon/>
+    </mat-form-field>
+
+    <button mat-icon-button
+            color="accent"
+            type="button"
+            class="time-button"
+            (click)="transferEndingTime()">
+      <mat-icon>keyboard_double_arrow_up</mat-icon>
+    </button>
+  </div>
+
+  <div class="timeContainer">
+    <mat-form-field>
+      <input matInput formControlName="bookingtil" [matTimepicker]="pickerBis"> <!--[(ngModel)]="endingTime"/>-->
+      <mat-label>bis</mat-label>
+      <mat-timepicker-toggle matIconSuffix [for]="pickerBis"/>
+      <mat-timepicker #pickerBis/>
+    </mat-form-field>
+
+    <button
+      mat-icon-button color="accent"
+      type="button"
+      class="time-button"
+      (click)="setCurrentTime()">
+      <mat-icon>switch_access_shortcut</mat-icon>
+    </button>
+
+  </div>
+</div>

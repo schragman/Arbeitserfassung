@@ -1,0 +1,80 @@
+<mat-sidenav-container fullscreen>
+  <mat-sidenav mode="side" [opened]="menuVisible">  <!-- Name des Seitenbereichs ist sidenav -->
+    <mat-nav-list (click)="closeMenu()">  <!-- Wenn man auf einen der Listenelemente klickt (click)="sidenav.close()"-->
+
+      <mat-list-item>
+        <mat-icon>app_registration</mat-icon>
+        <span>Zeiterfassung</span>
+      </mat-list-item>
+      <mat-list-item>
+        <mat-icon>keyboard_double_arrow_down</mat-icon>
+        <span>Übertrag zu Cats</span>
+      </mat-list-item>
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+
+  <mat-sidenav-content id="main-area">
+    <mat-card class="course-card mat-elevation-z7">
+      <mat-card-header>
+        <mat-card-title>Zeiterfassung</mat-card-title>
+      </mat-card-header>
+
+      <form [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+        <mat-card-content>
+
+            <!--<input [formControl]="mainForm.controls.name" />-->
+
+            <app-recording [form]="datesForm" />
+
+            <app-booking [form]="bookingForm"/>
+
+        </mat-card-content>
+
+        <mat-card-actions class="course-actions">
+          <button mat-raised-button color="primary">
+            Buchen
+          </button>
+          <button mat-raised-button color="accent">
+            Löschen
+          </button>
+        </mat-card-actions>
+      </form>
+
+
+    </mat-card>
+    <mat-card class="course-card mat-elevation-z7">
+      <mat-card-header>
+        <mat-card-title>Tagesliste</mat-card-title>
+      </mat-card-header>
+
+      <app-day-items/>
+
+<!--      <mat-card-content>
+        <input matInput [matDatepicker]="picker3">
+        <mat-hint>Startzeit</mat-hint>
+        <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
+        <mat-datepicker #picker3></mat-datepicker>
+      </mat-card-content>-->
+
+<!--      <mat-card-content>-->
+<!--        <input matInput [matDatepicker]="picker4">-->
+<!--        <mat-hint>Endzeit</mat-hint>-->
+<!--        <mat-datepicker-toggle matIconSuffix [for]="picker4"></mat-datepicker-toggle>-->
+<!--        <mat-datepicker #picker4></mat-datepicker>-->
+<!--      </mat-card-content>-->
+
+<!--      <mat-card-actions class="course-actions">-->
+<!--        <button mat-raised-button color="primary">-->
+<!--          Button 1-->
+<!--        </button>-->
+<!--        <button mat-raised-button color="accent">-->
+<!--          Button 2-->
+<!--        </button>-->
+<!--      </mat-card-actions>-->
+    </mat-card>
+
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
