@@ -1,0 +1,6 @@
+mat-header-cell {
+  display: flex;
+  align-items: center; /* vertikale Zentrierung */
+  padding: 8px 0;
+
+}

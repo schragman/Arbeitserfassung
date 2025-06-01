@@ -14,3 +14,7 @@
 .current-time-button {
   margin: 10px;
 }
+
+.wide-card {
+  flex-basis: 60%
+}
