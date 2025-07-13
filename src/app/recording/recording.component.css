@@ -8,6 +8,10 @@
   margin-bottom: 30px;
 }
 .timeContainer {
+  display: flex;
+  align-items: center;
+  gap: 8px; /* Abstand zwischen Timepicker und Button */
+
   margin-bottom: 10px;
 }
 
