@@ -26,8 +26,12 @@ export class PrepareService {
 
   public updatePreparedItem(preparedItem: PreparedItem) {
     this.preparedItems.set(this.preparedItems().map(item => item.id === preparedItem.id ? preparedItem : item));
-    console.log("All prepared items:" + this.preparedItems());
-    console.log("Updated prepared item:" + preparedItem);
+    console.log("Updated prepared item Name:" + preparedItem.name);
+    console.log("Updated prepared item isEditing:" + preparedItem.isEditing);
+  }
+
+  public deletePreparedItem(id: string) {
+    this.preparedItems.set(this.preparedItems().filter(item => item.id !== id));
   }
 
 }

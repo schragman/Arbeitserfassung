@@ -1,4 +1,4 @@
-import {Component, DestroyRef, effect, inject, OnInit, signal} from '@angular/core';
+import {Component, DestroyRef, effect, EventEmitter, inject, OnInit, Output, signal} from '@angular/core';
 import {MatTableModule} from '@angular/material/table';
 import {PrepareService} from '../services/prepare.service';
 import {BookingItem} from '../models/booking-item.model';
@@ -41,6 +41,8 @@ export class PrebookingsComponent implements OnInit {
 
   public formArray = signal<FormArray>(this.fb.array([]));
 
+  @Output() rowClicked = new EventEmitter<PreparedItem>();
+
   constructor() {
     // Effect wird erstellt, um auf Änderungen von preparedItems zu reagieren
     effect(() => {
@@ -49,6 +51,11 @@ export class PrebookingsComponent implements OnInit {
         items.map(item => this.createRowForm(item))
       );
       this.formArray.set(newFormArray);
+      console.log("Item wurde angepasst");
+      for (const row of newFormArray.controls) {
+        console.log("Name = " + row.get('name')?.value);
+        console.log("IsEditing = " + row.get('isEditing')?.value);
+      }
     });
   }
 
@@ -80,8 +87,9 @@ export class PrebookingsComponent implements OnInit {
       id: [item.id],
       name: [item.name || ''],
       bookingelement: [item.bookingelement || ''],
-      buchungstext: [item.explainingText || ''],
-      isEditing: [true]
+      explainingText: [item.explainingText || ''],
+      isEditing: [item.isEditing || false],
+      backup: [null]
     });
   }
 
@@ -89,8 +97,12 @@ export class PrebookingsComponent implements OnInit {
       this.prepareService.addPreparedItem();
   }
 
-  startEdit(index: number) {
-    const row = this.rows.at(index);
+  deleteRow(row: FormGroup) {
+    const id:string = row.value.id;
+    this.prepareService.deletePreparedItem(id);
+  }
+
+  startEdit(row: FormGroup) {
     row.patchValue({ isEditing: true });
     // Backup erstellen
     row.get('backup')?.setValue(row.value);
@@ -98,21 +110,18 @@ export class PrebookingsComponent implements OnInit {
 
   saveRow(row: FormGroup) {
     //const row = this.rows.at(index);
-    row.patchValue({ isEditing: false });
-
-    const newItem: PreparedItem = {
+    const updatedItem: PreparedItem = {
       id: row.value.id,
       name: row.value.name,
       bookingelement: row.value.bookingelement,
-      explainingText: row.value.buchungstext,
+      explainingText: row.value.explainingText,
       isEditing: false
     };
 
-    this.prepareService.updatePreparedItem(newItem);
+    this.prepareService.updatePreparedItem(updatedItem);
   }
 
-  cancelEdit(index: number) {
-    const row = this.rows.at(index);
+  cancelEdit(row: FormGroup) {
     const backup = row.get('backup')?.value;
     if (backup) {
       row.patchValue(backup);
@@ -120,7 +129,10 @@ export class PrebookingsComponent implements OnInit {
     row.patchValue({ isEditing: false });
   }
 
-
+  onRowClick(row: FormGroup) {
+    const id:string = row.value.id;
+    this.rowClicked.emit(this.preparedItems().find(item => item.id === id));
+  }
 
 
 }

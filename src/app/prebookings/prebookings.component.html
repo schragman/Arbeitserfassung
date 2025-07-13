@@ -12,11 +12,14 @@
       <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
       <mat-cell *matCellDef="let row">
 
-        <mat-form-field>
-          <mat-label>Name</mat-label>
-          <input matInput [formControl]="row.get('name')">
-
-        </mat-form-field>
+        @if (row.get('isEditing').value === true) {
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput [formControl]="row.get('name')">
+          </mat-form-field>
+        } @else {
+          {{ row.get('name').value }}
+        }
 
 
       </mat-cell>
@@ -26,15 +29,18 @@
     <ng-container matColumnDef="Buchungselement">
       <mat-header-cell *matHeaderCellDef>Buchungselement</mat-header-cell>
       <mat-cell *matCellDef="let row">
-        <mat-form-field>
-          <mat-label>Buchungselement</mat-label>
-          <mat-select [formControl]="row.get('bookingelement')">
-            @for (element of bookingElements; track element.id) {
-              <mat-option [value]="element.element">{{ element.element }}</mat-option>
-            }
-          </mat-select>
-
-        </mat-form-field>
+        @if (row.get('isEditing').value === true) {
+          <mat-form-field>
+            <mat-label>Buchungselement</mat-label>
+            <mat-select [formControl]="row.get('bookingelement')">
+              @for (element of bookingElements; track element.id) {
+                <mat-option [value]="element.element">{{ element.element }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        } @else {
+          {{ row.get('bookingelement').value }}
+        }
 
       </mat-cell>
     </ng-container>
@@ -44,12 +50,14 @@
       <mat-header-cell *matHeaderCellDef>Buchungstext</mat-header-cell>
       <mat-cell *matCellDef="let row">
 
-        <mat-form-field>
-          <mat-label>Beschreibung</mat-label>
-          <input matInput [formControl]="row.get('explainingText')">
-
-        </mat-form-field>
-
+        @if (row.get('isEditing').value === true) {
+          <mat-form-field>
+            <mat-label>Beschreibung</mat-label>
+            <input matInput [formControl]="row.get('explainingText')">
+          </mat-form-field>
+        } @else {
+          {{ row.get('explainingText').value }}
+        }
       </mat-cell>
     </ng-container>
 
@@ -58,18 +66,30 @@
       <mat-header-cell *matHeaderCellDef>Aktionen</mat-header-cell>
       <mat-cell *matCellDef="let row; let i = index">
 
-          <button mat-icon-button (click)="saveRow(row)" color="accent">
+        @if (row.get('isEditing').value === true) {
+          <button mat-icon-button (click)="saveRow(row); $event.stopPropagation()" color="accent">
             <mat-icon>check</mat-icon>
           </button>
-          <button mat-icon-button (click)="cancelEdit(i)" color="accent">
+          <button mat-icon-button (click)="cancelEdit(row); $event.stopPropagation()" color="accent">
             <mat-icon>close</mat-icon>
           </button>
+        } @else {
+          <button mat-icon-button (click)="startEdit(row); $event.stopPropagation()" color="accent">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="deleteRow(row); $event.stopPropagation()" color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        }
 
       </mat-cell>
     </ng-container>
 
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-    <mat-row *matRowDef="let row; columns: displayedColumns;"/>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"
+             (click)="onRowClick(row)"
+             [class.editing]="row.get('isEditing').value === true"
+    />
   </mat-table>
 
 </form>

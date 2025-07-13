@@ -38,5 +38,4 @@ export class BookingService {
     return this.temporaryBookingItem!;
   }
 
-
 }

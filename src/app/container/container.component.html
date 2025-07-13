@@ -61,7 +61,7 @@
         <mat-card-title>Voreingestellte Buchungen</mat-card-title>
       </mat-card-header>
 
-      <app-prebookings/>
+      <app-prebookings (rowClicked)="onPreparedRowSelected($event)"/>
 
     </mat-card>
 
