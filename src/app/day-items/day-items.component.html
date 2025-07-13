@@ -1,4 +1,16 @@
-<mat-table [dataSource]="dataSource()" class="mat-elevation-z8">
+<div class="dateContainer">
+  <mat-form-field >
+    <input matInput
+           [matDatepicker]="pickerDatum"
+           [ngModel]="selectedDay()"
+           (ngModelChange)="updateSelectedDay($event)"/>
+    <mat-label>Datum</mat-label>
+    <mat-datepicker-toggle matIconSuffix [for]="pickerDatum"/>
+    <mat-datepicker #pickerDatum></mat-datepicker>
+  </mat-form-field>
+</div>
+
+<mat-table [dataSource]="relevantItems" class="mat-elevation-z8">
   <!-- Von Spalte -->
   <ng-container matColumnDef="von">
     <mat-header-cell *matHeaderCellDef>Von</mat-header-cell>
@@ -33,5 +45,9 @@
 
   <!-- Header und Row Definitionen -->
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"
+           (click)="onRowClick(row)"
+           style="cursor: pointer;"
+           [class.selected-row]="row.id === selectedId"/>
+
 </mat-table>

@@ -1,20 +1,35 @@
+mat-sidenav-container {
+  height: calc(100vh - 64px); /* Abzüglich Toolbar-Höhe */
+  margin-top: 64px;
+}
+
+mat-sidenav-content {
+  display: flex;
+  flex-direction: column;
+  overflow: auto;
+  height: 100%;
+  padding: 1rem; /* optional für Innenabstand */
+  box-sizing: border-box;
+}
+
+
 .mat-datepicker-toggle button {
-  color: rgba(0, 150, 136, 1) !important; /* oder eine eigene Farbe */
-}
-.mat-timepicker-toggle button {
-  color: rgba(0, 150, 136, 1) !important; /* oder eine eigene Farbe */
-}
-.dateContainer {
-  margin-bottom: 30px;
-}
-.timeContainer {
-  margin-bottom: 10px;
-}
+    color: rgba(0, 150, 136, 1) !important; /* oder eine eigene Farbe */
+  }
+  .mat-timepicker-toggle button {
+    color: rgba(0, 150, 136, 1) !important; /* oder eine eigene Farbe */
+  }
+  .dateContainer {
+    margin-bottom: 30px;
+  }
+  .timeContainer {
+    margin-bottom: 10px;
+  }
 
-.current-time-button {
-  margin: 10px;
-}
+  .current-time-button {
+    margin: 10px;
+  }
 
-.wide-card {
-  flex-basis: 60%
-}
+  .wide-card {
+    flex-basis: 60%
+  }

@@ -68,4 +68,15 @@ export class RecordingComponent {
     //console.log(this.bookingFrom?.value)
     this.bookingFrom?.setValue(this.bookingtil?.value);
   }
+
+  completeBooking() {
+    this.bookingFrom = this.bookingtil;
+    this.setCurrentTime();
+  }
+
+  deleteBooking() {
+    this.bookingFrom = null;
+    this.setCurrentTime();
+  }
+
 }

@@ -29,4 +29,5 @@ export class BookingComponent {
   logSelection() {
     console.log('Gewählt wurde: ', this.selectedOption.value);
   }
+
 }

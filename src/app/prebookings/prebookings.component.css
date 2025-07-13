@@ -1,0 +1,9 @@
+.primary-bg {
+  background-color: var(--mat-primary-color);
+  color: white;
+}
+
+.accent-bg {
+  background-color: var(--mat-accent-color);
+  color: white;
+}

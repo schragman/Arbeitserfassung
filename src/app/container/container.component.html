@@ -14,7 +14,6 @@
     </mat-nav-list>
   </mat-sidenav>
 
-
   <mat-sidenav-content id="main-area">
     <mat-card class="course-card mat-elevation-z7">
       <mat-card-header>
@@ -30,18 +29,22 @@
 
             <app-booking [form]="bookingForm"/>
 
+
         </mat-card-content>
 
         <mat-card-actions class="course-actions">
           <button mat-raised-button color="primary">
-            Buchen
+            {{ okLabel() }}
           </button>
-          <button mat-raised-button color="accent">
-            Löschen
+          <button
+            mat-raised-button
+            color="accent"
+            type="button"
+            (click)="onCancel()">
+            {{ cancelLabel() }}
           </button>
         </mat-card-actions>
       </form>
-
 
     </mat-card>
     <mat-card class="course-card mat-elevation-z7 wide-card" >
@@ -49,30 +52,17 @@
         <mat-card-title>Tagesliste</mat-card-title>
       </mat-card-header>
 
-      <app-day-items/>
+      <app-day-items (rowClicked)="onRowSelected($event)"/>
 
-<!--      <mat-card-content>
-        <input matInput [matDatepicker]="picker3">
-        <mat-hint>Startzeit</mat-hint>
-        <mat-datepicker-toggle matIconSuffix [for]="picker3"></mat-datepicker-toggle>
-        <mat-datepicker #picker3></mat-datepicker>
-      </mat-card-content>-->
+    </mat-card>
 
-<!--      <mat-card-content>-->
-<!--        <input matInput [matDatepicker]="picker4">-->
-<!--        <mat-hint>Endzeit</mat-hint>-->
-<!--        <mat-datepicker-toggle matIconSuffix [for]="picker4"></mat-datepicker-toggle>-->
-<!--        <mat-datepicker #picker4></mat-datepicker>-->
-<!--      </mat-card-content>-->
+    <mat-card class="course-card mat-elevation-z7 wide-card" >
+      <mat-card-header>
+        <mat-card-title>Voreingestellte Buchungen</mat-card-title>
+      </mat-card-header>
 
-<!--      <mat-card-actions class="course-actions">-->
-<!--        <button mat-raised-button color="primary">-->
-<!--          Button 1-->
-<!--        </button>-->
-<!--        <button mat-raised-button color="accent">-->
-<!--          Button 2-->
-<!--        </button>-->
-<!--      </mat-card-actions>-->
+      <app-prebookings/>
+
     </mat-card>
 
   </mat-sidenav-content>

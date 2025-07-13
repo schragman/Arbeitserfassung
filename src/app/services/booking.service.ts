@@ -9,12 +9,33 @@ import {toObservable} from '@angular/core/rxjs-interop';
 export class BookingService {
   private readonly bookingitems = signal<BookingItem[]>([]);
   public bookingitems$ = toObservable(this.bookingitems);
+  private temporaryBookingItem: BookingItem | null = null;
 
   addDayItem(item: BookingItem) {
     const updatedItemList:BookingItem[] = [... this.bookingitems()];
     updatedItemList.push(item);
     this.bookingitems.set(updatedItemList);
     console.log("pushed item is " + item);
+  }
+
+  deleteItem(id: string) {
+    const items = [...this.bookingitems()];
+    const index = items.findIndex(item => item.id === id);
+    if (index > -1) {
+      items.splice(index, 1);
+      this.bookingitems.set(items);
+    }
+  }
+
+  showSelectedItem(rowId: string, bookingItem: BookingItem | null) :BookingItem {
+    if (bookingItem) {
+      this.temporaryBookingItem = bookingItem;
+    }
+    return this.bookingitems().find(item => item.id === rowId)!;
+  }
+
+  getTemporaryBookingItem() :BookingItem {
+    return this.temporaryBookingItem!;
   }
 
 

@@ -1,0 +1,75 @@
+<form [formGroup]="tableForm">
+  <div class="button-container">
+    <button mat-raised-button color="primary" (click)="addRow()">
+      <mat-icon>add</mat-icon>
+      Zeile hinzufügen
+    </button>
+  </div>
+
+  <mat-table [dataSource]="formArray().controls" class="mat-elevation-z8">
+    <!-- Name Spalte -->
+    <ng-container matColumnDef="Name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+
+        <mat-form-field>
+          <mat-label>Name</mat-label>
+          <input matInput [formControl]="row.get('name')">
+
+        </mat-form-field>
+
+
+      </mat-cell>
+    </ng-container>
+
+    <!-- Buchungselement Spalte -->
+    <ng-container matColumnDef="Buchungselement">
+      <mat-header-cell *matHeaderCellDef>Buchungselement</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-form-field>
+          <mat-label>Buchungselement</mat-label>
+          <mat-select [formControl]="row.get('bookingelement')">
+            @for (element of bookingElements; track element.id) {
+              <mat-option [value]="element.element">{{ element.element }}</mat-option>
+            }
+          </mat-select>
+
+        </mat-form-field>
+
+      </mat-cell>
+    </ng-container>
+
+    <!-- Buchungstext Spalte -->
+    <ng-container matColumnDef="Buchungstext">
+      <mat-header-cell *matHeaderCellDef>Buchungstext</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+
+        <mat-form-field>
+          <mat-label>Beschreibung</mat-label>
+          <input matInput [formControl]="row.get('explainingText')">
+
+        </mat-form-field>
+
+      </mat-cell>
+    </ng-container>
+
+    <!-- Aktionen Spalte -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Aktionen</mat-header-cell>
+      <mat-cell *matCellDef="let row; let i = index">
+
+          <button mat-icon-button (click)="saveRow(row)" color="accent">
+            <mat-icon>check</mat-icon>
+          </button>
+          <button mat-icon-button (click)="cancelEdit(i)" color="accent">
+            <mat-icon>close</mat-icon>
+          </button>
+
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"/>
+  </mat-table>
+
+</form>
