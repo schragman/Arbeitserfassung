@@ -1,0 +1,52 @@
+<mat-sidenav-content id="main-area">
+  <mat-card class="course-card mat-elevation-z7">
+    <mat-card-header>
+      <mat-card-title>Zeiterfassung</mat-card-title>
+    </mat-card-header>
+
+    <form [formGroup]="mainForm" (ngSubmit)="onSubmit()">
+      <mat-card-content>
+
+        <!--<input [formControl]="mainForm.controls.name" />-->
+
+        <app-recording [form]="datesForm" />
+
+        <app-booking [form]="bookingForm"/>
+
+
+      </mat-card-content>
+
+      <mat-card-actions class="course-actions">
+        <button mat-raised-button color="primary">
+          {{ okLabel() }}
+        </button>
+        <button
+          mat-raised-button
+          color="accent"
+          type="button"
+          (click)="onCancel()">
+          {{ cancelLabel() }}
+        </button>
+      </mat-card-actions>
+    </form>
+
+  </mat-card>
+  <mat-card class="course-card mat-elevation-z7 wide-card" >
+    <mat-card-header>
+      <mat-card-title>Tagesliste</mat-card-title>
+    </mat-card-header>
+
+    <app-day-items (rowClicked)="onRowSelected($event)"/>
+
+  </mat-card>
+
+  <mat-card class="course-card mat-elevation-z7 wide-card" >
+    <mat-card-header>
+      <mat-card-title>Voreingestellte Buchungen</mat-card-title>
+    </mat-card-header>
+
+    <app-prebookings (rowClicked)="onPreparedRowSelected($event)"/>
+
+  </mat-card>
+
+</mat-sidenav-content>
