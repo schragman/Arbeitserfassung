@@ -1,0 +1,55 @@
+<form [formGroup]="tableForm">
+  <div class="button-container">
+    <button mat-raised-button color="primary" (click)="addRow()">
+      <mat-icon>add</mat-icon>
+      Zeile hinzufügen
+    </button>
+  </div>
+
+  <mat-table [dataSource]="formArray().controls" class="mat-elevation-z8">
+    <!-- Name Spalte -->
+    <ng-container matColumnDef="Name">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let row">
+
+        @if (row.get('isEditing').value === true) {
+          <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput [formControl]="row.get('name')">
+          </mat-form-field>
+        } @else {
+          {{ row.get('name').value }}
+        }
+
+
+      </mat-cell>
+    </ng-container>
+
+    <!-- Aktionen Spalte -->
+    <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef>Aktionen</mat-header-cell>
+      <mat-cell *matCellDef="let row; let i = index">
+
+        @if (row.get('isEditing').value === true) {
+          <button mat-icon-button (click)="saveRow(row); $event.stopPropagation()" color="accent">
+            <mat-icon>check</mat-icon>
+          </button>
+          <button mat-icon-button (click)="cancelEdit(row); $event.stopPropagation()" color="accent">
+            <mat-icon>close</mat-icon>
+          </button>
+        } @else {
+          <button mat-icon-button (click)="startEdit(row); $event.stopPropagation()" color="accent">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-icon-button (click)="deleteRow(row); $event.stopPropagation()" color="warn">
+            <mat-icon>delete</mat-icon>
+          </button>
+        }
+
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"/>
+  </mat-table>
+</form>

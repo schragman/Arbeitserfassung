@@ -5,6 +5,7 @@ import {MatIcon} from '@angular/material/icon';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatOption} from '@angular/material/select';
 import {MainComponent} from '../mainarea/main/main.component';
+import {RouterOutlet} from '@angular/router';
 
 
 @Component({
@@ -19,6 +20,7 @@ import {MainComponent} from '../mainarea/main/main.component';
     MatOption,
     FormsModule,
     ReactiveFormsModule,
+    RouterOutlet,
   ],
   templateUrl: './container.component.html',
   styleUrl: './container.component.css',
