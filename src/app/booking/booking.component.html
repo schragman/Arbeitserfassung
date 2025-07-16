@@ -3,7 +3,7 @@
     <mat-form-field>
       <mat-label>Buchungselement</mat-label>
       <mat-select formControlName="bookingelement">
-        @for (element of bookingElements; track element.id) {
+        @for (element of bookingElements(); track element.id) {
           <mat-option [value]="element.element">{{ element.element }}</mat-option>
         }
       </mat-select>

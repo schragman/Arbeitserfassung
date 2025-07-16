@@ -1,9 +1,9 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {BookingElements} from '../recording/booking-elements';
+import {Component, EventEmitter, inject, Input, Output} from '@angular/core';
 import {MatInput} from '@angular/material/input';
 import {MatOption, MatSelect} from '@angular/material/select';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MatFormField, MatLabel} from '@angular/material/form-field';
+import {BookingService} from '../services/booking.service';
 
 @Component({
   selector: 'app-booking',
@@ -22,7 +22,9 @@ import {MatFormField, MatLabel} from '@angular/material/form-field';
 export class BookingComponent {
 
   @Input() form!: FormGroup;
-  protected readonly bookingElements = BookingElements;
+  private bookingService = inject(BookingService);
+  //protected readonly bookingElements = BookingElements;
+  protected readonly bookingElements = this.bookingService.bookingElements;
 
   selectedOption = new FormControl<String | null>(null);
 

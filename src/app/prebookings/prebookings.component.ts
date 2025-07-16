@@ -1,16 +1,14 @@
 import {Component, DestroyRef, effect, EventEmitter, inject, OnInit, Output, signal} from '@angular/core';
 import {MatTableModule} from '@angular/material/table';
 import {PrepareService} from '../services/prepare.service';
-import {BookingItem} from '../models/booking-item.model';
-import {subscriptionLogsToBeFn} from 'rxjs/internal/testing/TestScheduler';
 import {PreparedItem} from '../models/prepared-item.model';
 import {MatIcon} from '@angular/material/icon';
 import {MatButton, MatIconButton} from '@angular/material/button';
 import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {MatOption, MatSelect} from '@angular/material/select';
-import {BookingElements} from '../recording/booking-elements';
 import {MatInput} from '@angular/material/input';
+import {BookingService} from '../services/booking.service';
 
 @Component({
   selector: 'app-prebookings',
@@ -35,11 +33,14 @@ export class PrebookingsComponent implements OnInit {
   private prepareService = inject(PrepareService);
   private destroyRef = inject(DestroyRef);
   private fb = inject(FormBuilder);
-  protected readonly bookingElements = BookingElements;
+  private bookingService = inject(BookingService);
+  protected readonly bookingElements = this.bookingService.bookingElements;
   public displayedColumns = ['Name', 'Buchungselement', 'Buchungstext', 'actions'];
   public preparedItems = signal<PreparedItem[]>([]);
 
-  public formArray = signal<FormArray>(this.fb.array([]));
+  public formArray = signal<FormArray>(this.fb.array([
+    this.preparedItems().map(item => this.createRowForm(item))
+  ]));
 
   @Output() rowClicked = new EventEmitter<PreparedItem>();
 

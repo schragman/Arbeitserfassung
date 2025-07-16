@@ -6,7 +6,6 @@ import {MAT_TIMEPICKER_CONFIG, MatTimepickerModule, MatTimepickerToggle} from '@
 import {AbstractControl, FormGroup, FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MatInput} from '@angular/material/input';
 import {MatIconButton} from '@angular/material/button';
-import {BookingElements} from './booking-elements';
 import {GeneralService} from '../services/general.service';
 
 @Component({

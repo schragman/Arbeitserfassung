@@ -1,6 +1,7 @@
 import {Injectable, signal} from '@angular/core';
 import {BookingItem} from '../models/booking-item.model';
 import {toObservable} from '@angular/core/rxjs-interop';
+import {BookingElement} from '../models/booking-element.model';
 
 @Injectable({
   providedIn: "root"
@@ -37,5 +38,33 @@ export class BookingService {
   getTemporaryBookingItem() :BookingItem {
     return this.temporaryBookingItem!;
   }
+
+  public readonly bookingElements = signal<BookingElement[]>([
+    {
+      id: '1',
+      element: 'Aufteilung',
+      isEditing: false
+    },
+    {
+      id: '2',
+      element: 'Betrieb Makler-Webservices',
+      isEditing: false
+    },
+    {
+      id: '3',
+      element: 'Kerwartung Makler-Webservices',
+      isEditing: false
+    },
+    {
+      id: '4',
+      element: 'Betrieb Autentifizierung',
+      isEditing: false
+    },
+    {
+      id: '5',
+      element: 'Kerwartung Autentifizierung',
+      isEditing: false
+    },
+  ]);
 
 }
