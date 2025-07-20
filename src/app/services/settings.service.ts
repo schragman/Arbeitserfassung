@@ -20,6 +20,19 @@ export class SettingsService {
     console.log("pushed new element: " + newElement.element);
   }
 
+  public updateBookingElement(element: BookingElement) {
+    const updatedBookingElements = [...this.bookingService.bookingElements()];
+    const index = updatedBookingElements.findIndex(item => element.id === item.id);
+
+    if (index > -1) {
+      console.log("Element found at index: " + index + " with id: " + element.id + " and name: " + element.element + " and isEditing: " + element.isEditing);
+      updatedBookingElements[index] = element;
+    }
+    this.bookingService.bookingElements.set(updatedBookingElements);
+    console.log("Updated booking element Name:" + element.element);
+
+  }
+
   public deleteBookingElement(id: string) {
     const bookingElements = [...this.bookingService.bookingElements()];
     const index = bookingElements.findIndex(element => element.id === id);
@@ -29,12 +42,5 @@ export class SettingsService {
     }
   }
 
-  public updateBookingElement(element: BookingElement) {
-    const bookingElements = [...this.bookingService.bookingElements()];
-    const index = bookingElements.findIndex(element => element.id === element.id);
-    if (index > -1) {
-      bookingElements[index] = element;
-    }
-  }
 
 }

@@ -9,7 +9,7 @@ import {
   MatRow, MatRowDef, MatTableModule
 } from '@angular/material/table';
 import {MatIcon} from '@angular/material/icon';
-import {MatIconButton} from '@angular/material/button';
+import {MatButton, MatIconButton} from '@angular/material/button';
 import {FormArray, FormBuilder, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import {MatFormField, MatLabel} from '@angular/material/form-field';
 import {BookingService} from '../../services/booking.service';
@@ -21,6 +21,7 @@ import {MatInput} from '@angular/material/input';
 @Component({
   selector: 'app-bookings',
   imports: [
+    MatButton,
     MatCell,
     MatCellDef,
     MatColumnDef,
@@ -49,7 +50,7 @@ export class BookingsComponent {
     rows: this.formArray()
   });
 
-  protected readonly displayedColumns = ['Buchungselement', 'actions'];
+  protected readonly displayedColumns = ['Name', 'actions'];
   protected readonly bookingElements = this.bookingService.bookingElements;
 
   constructor() {
@@ -74,6 +75,7 @@ export class BookingsComponent {
       element: row.value.name,
       isEditing: false
     }
+    console.log("Element wurde gespeichert "+"id: "+updatedItem.id+" name: "+updatedItem.element);
     this.settingsService.updateBookingElement(updatedItem);
   }
 
