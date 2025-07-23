@@ -4,12 +4,32 @@
 
       <mat-list-item>
         <mat-icon>app_registration</mat-icon>
-        <span>Zeiterfassung</span>
+        <a routerLink="/">
+          <span>Zeiterfassung</span>
+        </a>
       </mat-list-item>
       <mat-list-item>
         <mat-icon>keyboard_double_arrow_down</mat-icon>
         <span>Übertrag zu Cats</span>
       </mat-list-item>
+      <div class="nav-section">
+        <div class="nav-section-header">
+          <mat-icon>settings</mat-icon>
+          <span>Settings</span>
+        </div>
+
+        <!-- Untermenü-Einträge -->
+        <mat-nav-list class="nav-section-items">
+          <mat-list-item>
+            <a routerLink="/settings/bookings">
+              <span class="submenu-item">Buchungselemente</span>
+            </a>
+          </mat-list-item>
+        </mat-nav-list>
+      </div>
+
+
+
 
     </mat-nav-list>
   </mat-sidenav>

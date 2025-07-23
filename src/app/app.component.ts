@@ -29,7 +29,7 @@ import {ContainerComponent} from './container/container.component';
     MatIconButton,
   ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  styleUrl: './app.component.scss',
   providers: [provideNativeDateAdapter()],
   standalone: true
 })

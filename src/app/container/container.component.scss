@@ -12,6 +12,40 @@ mat-sidenav-content {
   box-sizing: border-box;
 }
 
+.nav-section {
+  margin-top: 16px;
+}
+
+.nav-section-header {
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.87);
+
+  mat-icon {
+    margin-right: 16px;
+  }
+}
+
+
+.nav-section-items {
+  padding-left: 16px;
+
+  .submenu-item {
+    margin-left: 40px; // Einrückung für Untermenü-Einträge
+  }
+}
+
+// Stil für alle Links
+a {
+  color: white !important;
+  text-decoration: none;
+}
+
+
+
 
 .mat-datepicker-toggle button {
     color: rgba(0, 150, 136, 1) !important; /* oder eine eigene Farbe */

@@ -18,3 +18,13 @@ mat-drawer {
 .content {
   padding: 16px;
 }
+
+mat-toolbar {
+  button {
+    color: white !important;
+
+    mat-icon {
+      color: white !important;
+    }
+  }
+}
