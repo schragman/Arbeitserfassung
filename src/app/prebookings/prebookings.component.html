@@ -8,17 +8,17 @@
 
   <mat-table [dataSource]="formArray().controls" class="mat-elevation-z8">
     <!-- Name Spalte -->
-    <ng-container matColumnDef="Name">
-      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+    <ng-container matColumnDef="Buchungstext">
+      <mat-header-cell *matHeaderCellDef>Buchungstext</mat-header-cell>
       <mat-cell *matCellDef="let row">
 
         @if (row.get('isEditing').value === true) {
           <mat-form-field>
-            <mat-label>Name</mat-label>
-            <input matInput [formControl]="row.get('name')">
+            <mat-label>Beschreibung</mat-label>
+            <input matInput [formControl]="row.get('explainingText')">
           </mat-form-field>
         } @else {
-          {{ row.get('name').value }}
+          {{ row.get('explainingText').value }}
         }
 
 
@@ -42,22 +42,6 @@
           {{ row.get('bookingelement').value }}
         }
 
-      </mat-cell>
-    </ng-container>
-
-    <!-- Buchungstext Spalte -->
-    <ng-container matColumnDef="Buchungstext">
-      <mat-header-cell *matHeaderCellDef>Buchungstext</mat-header-cell>
-      <mat-cell *matCellDef="let row">
-
-        @if (row.get('isEditing').value === true) {
-          <mat-form-field>
-            <mat-label>Beschreibung</mat-label>
-            <input matInput [formControl]="row.get('explainingText')">
-          </mat-form-field>
-        } @else {
-          {{ row.get('explainingText').value }}
-        }
       </mat-cell>
     </ng-container>
 

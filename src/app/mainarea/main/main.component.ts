@@ -38,9 +38,9 @@ export class MainComponent {
 
   private generalService = inject(GeneralService);
   private bookingService = inject(BookingService);
-  private mode: Modes = Modes.normal;
+  protected readonly Modes = Modes;
+  protected mode: Modes = Modes.normal;
   protected okLabel = signal('Buchen')
-  protected cancelLabel = signal('Löschen')
   private selectedRow: BookingItem |null = null;
 
   mainForm = new FormGroup({
@@ -78,16 +78,25 @@ export class MainComponent {
     }
   }
 
-  onCancel() {
+  onDelete() {
     if (this.mode === Modes.normal) {
       this.onCompleteBooking(null);
-    } else {
-      this.installTemporaryBookingItem();
+    } else if (this.selectedRow) {
+      this.bookingService.deleteItem(this.selectedRow?.id)
+      this.backToNormalMode();
     }
+  }
+
+  onCancel() {
+    this.installTemporaryBookingItem();
   }
 
   private installTemporaryBookingItem() {
     this.setBookingForm(this.bookingService.getTemporaryBookingItem());
+    this.backToNormalMode();
+  }
+
+  private backToNormalMode() {
     this.mode = Modes.normal;
     this.renameButtons(this.mode);
     this.dayItemsComponent.onDeselect();
@@ -144,11 +153,11 @@ export class MainComponent {
 
   private renameButtons(mode: Modes) {
     if (mode === Modes.normal) {
-      this.okLabel.update(value => 'Buchen')
-      this.cancelLabel.update(value => 'Löschen')
+      this.okLabel.update(() => 'Buchen')
     } else {
-      this.okLabel.update(value => 'Ändern')
-      this.cancelLabel.update(value => 'Abbrechen')
+      this.okLabel.update(() => 'Ändern')
     }
   }
+
+
 }

@@ -22,11 +22,21 @@
         </button>
         <button
           mat-raised-button
-          color="accent"
+          color="primary"
           type="button"
-          (click)="onCancel()">
-          {{ cancelLabel() }}
+          (click)="onDelete()">
+          Löschen
         </button>
+          @if (mode === Modes.edit) {
+          <button
+            mat-raised-button
+            color="accent"
+            type="button"
+            (click)="onCancel()"
+          >
+            Abbrechen
+          </button>
+        }
       </mat-card-actions>
     </form>
 

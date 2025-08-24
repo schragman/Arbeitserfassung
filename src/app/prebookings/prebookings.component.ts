@@ -35,7 +35,7 @@ export class PrebookingsComponent implements OnInit {
   private fb = inject(FormBuilder);
   private bookingService = inject(BookingService);
   protected readonly bookingElements = this.bookingService.bookingElements;
-  public displayedColumns = ['Name', 'Buchungselement', 'Buchungstext', 'actions'];
+  public displayedColumns = ['Buchungstext', 'Buchungselement', 'actions'];
   public preparedItems = signal<PreparedItem[]>([]);
 
   public formArray = signal<FormArray>(this.fb.array([
@@ -54,7 +54,6 @@ export class PrebookingsComponent implements OnInit {
       this.formArray.set(newFormArray);
       console.log("Item wurde angepasst");
       for (const row of newFormArray.controls) {
-        console.log("Name = " + row.get('name')?.value);
         console.log("IsEditing = " + row.get('isEditing')?.value);
       }
     });
@@ -86,7 +85,6 @@ export class PrebookingsComponent implements OnInit {
   private createRowForm(item: PreparedItem): FormGroup {
     return this.fb.group({
       id: [item.id],
-      name: [item.name || ''],
       bookingelement: [item.bookingelement || ''],
       explainingText: [item.explainingText || ''],
       isEditing: [item.isEditing || false],
@@ -113,7 +111,6 @@ export class PrebookingsComponent implements OnInit {
     //const row = this.rows.at(index);
     const updatedItem: PreparedItem = {
       id: row.value.id,
-      name: row.value.name,
       bookingelement: row.value.bookingelement,
       explainingText: row.value.explainingText,
       isEditing: false
