@@ -15,7 +15,7 @@ export class SettingsService {
 
   public loadBookingElements() {
     const subscription = this.httpClient
-      .get<ResponseBookingElement[]>('http://localhost:8088/settings/bookingitems')
+      .get<ResponseBookingElement[]>('api/settings/bookingitems')
       .subscribe({
         next: (bookingElements) => {
           let initialBookingElements:BookingElement[] = [];
@@ -76,7 +76,7 @@ export class SettingsService {
       bookingElements.splice(index, 1);
       this.bookingService.bookingElements.set(bookingElements);
     }
-    this.httpClient.delete('http://localhost:8088/settings/deletebookingitem/' + id)
+    this.httpClient.delete('api/settings/deletebookingitem/' + id)
       .subscribe({
         next: (response) => {
           console.log("Element deleted: " + response);
@@ -92,7 +92,7 @@ export class SettingsService {
       id: element.id,
       element: element.element,
     }
-    this.httpClient.put('http://localhost:8088/settings/writebookingitem', requestBookingElement)
+    this.httpClient.put('api/settings/writebookingitem', requestBookingElement)
       .subscribe({
         next: (response) => {
           console.log("Element updated: " + response);

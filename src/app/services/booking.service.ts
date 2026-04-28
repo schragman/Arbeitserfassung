@@ -20,7 +20,7 @@ export class BookingService {
 
   public loadBookedItems() {
     const subscription = this.httpClient
-      .get<ResponseBookedItem[]>('http://localhost:8088/bookeditems/items')
+      .get<ResponseBookedItem[]>('api/bookeditems/items')
       .subscribe({
         next: (transferredbookedItems) => {
           console.log("Booked items are loaded: " + transferredbookedItems);
@@ -49,7 +49,7 @@ export class BookingService {
     const tranferrableBookingItem:ResponseBookedItem = toDto(item);
 
     const subscription =
-      this.httpClient.put('http://localhost:8088/bookeditems/writeitem', tranferrableBookingItem)
+      this.httpClient.put('api/bookeditems/writeitem', tranferrableBookingItem)
         .subscribe({
           next: (response) => {
             console.log("Element updated: " + response);
@@ -71,7 +71,7 @@ export class BookingService {
       items.splice(index, 1);
       this.bookingitems.set(items);
     }
-    this.httpClient.delete('http://localhost:8088/bookeditems/deleteitem/' + id)
+    this.httpClient.delete('api/bookeditems/deleteitem/' + id)
       .subscribe({
         next: (response) => {
           console.log("Element deleted: " + response);

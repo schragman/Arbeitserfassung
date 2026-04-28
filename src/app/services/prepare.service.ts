@@ -18,7 +18,7 @@ export class PrepareService {
 
   public loadPreparedItems() {
     const subscription = this.httpClient
-      .get<ResponsePreparedItem[]>('http://localhost:8088/prepareditems/items')
+      .get<ResponsePreparedItem[]>('api/prepareditems/items')
       .subscribe({
         next: (preparedItems) => {
           let initialPreparedItems:PreparedItem[] = [];
@@ -66,7 +66,7 @@ export class PrepareService {
       explainingtext: preparedItem.explainingText
     }
 
-    this.httpClient.put('http://localhost:8088/prepareditems/writeitem', requestPreparedItem)
+    this.httpClient.put('api/prepareditems/writeitem', requestPreparedItem)
       .subscribe({
         next: (response) => {
           console.log("Element updated: " + response);
@@ -79,7 +79,7 @@ export class PrepareService {
 
   public deletePreparedItem(id: string) {
     this.preparedItems.set(this.preparedItems().filter(item => item.id !== id));
-    this.httpClient.delete('http://localhost:8088/prepareditems/deleteitem/' + id)
+    this.httpClient.delete('api/prepareditems/deleteitem/' + id)
       .subscribe({
         next: (response) => {
           console.log("Element deleted: " + response);
